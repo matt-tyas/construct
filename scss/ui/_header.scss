@@ -1,0 +1,49 @@
+/**
+ * $header
+ */
+ 
+.site-header {
+  max-width: 575px;
+  margin: 0 auto;
+  height: 110px;
+  img {
+    width: 240px;
+    height: 29px;
+  }
+}
+.site-title {
+  max-width: 565px;
+  margin: $base-spacing-unit*2 auto $half-spacing-unit auto;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.headroom--not-top .site-title {
+  margin: $base-spacing-unit auto $half-spacing-unit auto;
+}
+
+.headroom {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  left: 0;
+  top: 0;
+  -webkit-transition:transform 200ms linear;
+   -moz-transition:transform 200ms linear;
+     -o-transition:transform 200ms linear;
+        transition:transform 200ms linear;
+}
+.headroom--pinned {
+  -webkit-transform:translateY(0%);
+   -moz-transform:translateY(0%);
+    -ms-transform:translateY(0%);
+     -o-transform:translateY(0%);
+        transform:translateY(0%);
+}
+.headroom--unpinned {
+ -webkit-transform:translateY(-100%);
+   -moz-transform:translateY(-100%);
+    -ms-transform:translateY(-100%);
+     -o-transform:translateY(-100%);
+        transform:translateY(-100%);
+}

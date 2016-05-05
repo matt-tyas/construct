@@ -1,0 +1,77 @@
+/**
+ * $main
+ */
+ 
+ body {
+	 font-family: $body-face;
+	 //-webkit-font-smoothing: antialiased;
+	 background: #fff;
+ }
+ 
+ /*  Transition between queries
+    --------------------------  */
+    
+body, img { 
+-webkit-transition: all .2s linear;
+   -moz-transition: all .2s linear;
+	   -o-transition: all .2s linear; 
+        transition: all .2s linear; 
+}
+	 
+a {
+    color: $brand-color; 
+    text-decoration: none;
+    -webkit-transition:all 150ms ease-in;
+       -moz-transition:all 150ms ease-in;
+	     -o-transition:all 150ms ease-in;
+	        transition:all 150ms ease-in;
+
+    &:hover,
+    &:active,
+    &:focus{
+        text-decoration: none;
+        color: #999;
+    }
+    
+}
+
+ ::selection {
+	background: $brand-color;
+	color: #fff;
+	}
+ ::-moz-selection {
+	background: $brand-color;
+	color: #fff;
+	}
+
+/**
+ * $page
+ */
+ 
+#page {
+  @extend .cf;
+  position: relative;
+	max-width: 600px;
+	margin: 0px auto 0 auto;
+	padding: 120px 1em 0 1em;	
+  -webkit-backface-visibility: hidden;
+-ms-backface-visibility: hidden;
+backface-visibility: hidden;
+-webkit-transition: all .3s ease;
+-moz-transition:all .3s ease;
+       -o-transition:all .3s ease;
+-ms-transition: all .3s ease;
+        transition: all .3s ease;
+    //     -webkit-transform: translateY(0px);
+    // -ms-transform: translateY(0px);
+    //     transform: translateY(0px);
+	@include media-query(palm) {
+		//
+	}
+}
+
+.site-main,
+.main-content,
+.site-content {
+  @extend .cf;
+}

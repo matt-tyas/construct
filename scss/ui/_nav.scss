@@ -1,0 +1,565 @@
+/**
+ * $nav
+ */
+
+#menu-main-navigation {
+  position: relative;
+  display: table;
+  width: 100%;
+  margin-bottom:0;
+}
+
+// @media screen and (-webkit-min-device-pixel-ratio:0) { 
+//   nav .sub-menu {
+//     li:after {
+//       position: relative;
+//       top: -3px;
+//     }
+//   }
+// }
+
+
+ 
+.nav {
+  li:before {
+    color: #9a9a9f;
+    content: "/";
+  }
+  li:first-child:before {
+    content: "";
+  }
+  .current-menu-item {
+    a {
+      color: #000;
+      .sub-menu a {
+        color: #9a9a9f;
+      }
+    }
+  }
+  a {
+    color: #9a9a9f;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px;
+    &:hover {
+      color: #000;
+    }
+  }
+  .current-menu-ancestor a {
+    color: #000;
+  }
+  li.current-menu-item a {
+    color: #000 !important;
+  }
+  .sub-menu {
+    //display: block;
+    //max-width: 600px;
+    min-height: 60px;
+    //margin: 0 auto;
+    //display: none; /* hide all sub menus from view */
+    overflow: visible;
+
+    @extend .cf;
+    visibility: hidden;
+    opacity: 0;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    clear: both;
+    top: 20px; 
+    left: 0%; 
+    bottom: 0; 
+    right: 0;
+    z-index: 1;
+    -webkit-transition: all .25s ease;
+       -moz-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+         -o-transition: all .25s ease;
+            transition: all .25s ease;
+    list-style:none;
+    margin-left:0;
+    text-align: center;
+    background: #fff;
+    @include font-size($milli-size);
+    @extend .cf;
+    a {
+      padding: 0px 5px 0px 5px;
+    }
+    &:hover {
+      color:#000;
+    }
+    > li{
+      &,
+      > a{
+        display:inline-block;
+       *display:inline;
+        zoom:1;
+        background: #fff;
+        margin-top: -25px;
+        
+      }
+    }
+  }
+}
+
+li.menu-item ul {
+  //margin: 0 auto;
+}
+
+li.menu-item:hover ul {
+  //margin: 0 auto;
+  visibility: visible;
+  display: table-cell; 
+  top: 30px;
+  opacity: 1;
+  a {
+    color: #9a9a9f;
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+ li.menu-item ul.sub-menu {
+   min-height: 80px;
+ }
+}
+
+
+@media (max-width: 600px) {
+  li.menu-item ul {
+    
+    margin: 0 auto;
+  }
+  li.menu-item:hover ul {
+    
+    a {
+      
+    }
+  }
+}
+
+.nav li.no-slash:before {
+  color: #fff;
+  content: "";
+} 
+@media (max-width: 600px) {
+ .nav li.no-slash:before {
+  color: #9a9a9f !important;
+  content: "/" !important;
+  }
+}
+
+// variables - colors
+
+$main-text: #000; // main text
+$link: #000; // anchor tags
+$background: #fff; // body background color
+
+$color-1: #fff; // green dark
+$color-2: #000; // green darker
+$color-3: #fff; // green light
+
+// variables - fonts 
+
+$primary-font: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+// variables - z-index 
+
+$content-zindex: 2;
+$secondary-nav: 1;
+
+// variables - header height 
+
+$header-S: 50px;
+$header-M: 70px;
+
+// mixins - center vertically and/or horizontally an absolute positioned element
+
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    //@include transform(translateX(-50%) translateY(-50%));
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    //@include transform(translateX(-50%));
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    //@include transform(translateY(-50%));
+  }
+}
+
+// mixins - border radius
+
+@mixin border-radius($radius:.25em) {
+  border-radius: $radius;
+}
+
+// layout - breakpoints
+
+$S:     320px;   
+$M:     768px;     
+$L:     1170px;     
+
+// layout - media queries
+
+@mixin MQ($canvas) {
+  @if $canvas == S {
+   @media only screen and (min-width: $S) { @content; } 
+  }
+  @else if $canvas == M {
+   @media only screen and (min-width: $M) { @content; } 
+  }
+  @else if $canvas == L {
+   @media only screen and (min-width: $L) { @content; } 
+  }
+}
+
+
+/* -------------------------------- 
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+
+.cd-img-replace { /* replace text with a background-image */
+  display: inline-block;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* -------------------------------- 
+
+Main components 
+
+-------------------------------- */
+
+.cd-main-content {
+  /* set a min-height and a z-index to be sure that the main element completely covers the lateral menu */
+  min-height: 100%;
+  position: relative;
+  background-color: $background;
+  z-index: $content-zindex;
+
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+
+  //@include transition-property(transform);
+  //@include transition-duration(.4s);
+
+  &.lateral-menu-is-open {
+    /* translate to show the lateral menu - all content needs to be put in the .cd-main-content to translate*/
+    //@include transform(translateX(-260px));
+  }
+}
+
+header {
+  position: relative;
+  // height: $header-S;
+  width: 100%;
+  background: $color-1;
+
+  @include MQ(M) {
+    // height: $header-M;
+  }
+}
+
+#cd-logo {
+  display: block;
+  float: left;
+  margin: 12px 0 0 20px;
+   font-weight: 600;
+  img {
+    display: block;
+  }
+
+  @include MQ(M) {
+    margin: 22px 0 0 30px;
+  }
+}
+
+#cd-top-nav {
+  position: absolute;
+  top: 0;
+  right: 120px;
+  height: 100%;
+
+  display: none;
+
+  ul {
+    height: 100%;
+    padding-top: 18px;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 1em;
+  }
+
+  a {
+    display: inline-block;
+    padding: .5em;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &.current {
+      background-color: $color-2;
+    }
+
+    .no-touch &:hover {
+      color: rgba(#000, .7);
+    }
+  }
+
+  @include MQ(M) {
+    display: block;
+  }
+}
+
+#cd-menu-trigger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 50px;
+  background-color: lighten($color-1, 10%);
+
+  .cd-menu-text {
+    height: 100%;
+
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 600;
+
+    display: none;
+  }
+
+  .cd-menu-icon {
+    /* this span is the central line in the menu menu */
+    display: inline-block;
+    position: absolute;
+    @include center; 
+    width: 18px;
+    height: 2px;
+    background-color: #000;
+    
+    /* these are the upper and lower lines in the menu menu */
+    &::before, &:after {
+      content: '';
+      width: 100%;
+      height: 100%; 
+      position: absolute;
+      background-color: inherit;
+      left: 0;
+      /* Force Hardware Acceleration in WebKit */
+      -webkit-transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+    }
+    
+    &::before {
+      bottom: 5px;
+    }
+
+    &::after {
+      top: 5px;
+    }
+  }
+
+  &.is-clicked {
+    .cd-menu-icon {
+      background-color: rgba(#000, 0);
+
+      &::before, &::after {
+        background-color: rgba(#000, 1);
+      }
+
+      &::before {
+        bottom: 0;
+        //@include transform(rotate(45deg));
+      }
+
+      &::after {
+        top: 0;
+        //@include transform(rotate(-45deg));
+      }
+    }
+  }
+
+  @include MQ(M) {
+    width: 110px;
+    padding-left: 1.25em;
+
+    .cd-menu-text {
+      display: inline-block;
+      line-height: $header-M;
+    }
+
+    .cd-menu-icon {
+      left: auto;
+      right: 1.25em;
+      //@include transform(translateX(0));
+    }
+  }
+}
+
+#cd-lateral-nav {
+  position: fixed;
+  height: 100%;
+  right: 0;
+  top: 0;
+
+  /* the secondary navigation is covered by the main element */
+  z-index: $secondary-nav; 
+
+  width: 260px;
+  background-color: $color-2;
+
+  overflow-y: auto;
+
+  /* smooth the scrolling on touch devices - webkit browsers */
+  -webkit-overflow-scrolling: touch;
+
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+
+  //@include transition-property(transform);
+  //@include transition-duration(.4s);
+
+  /* this creates the subtle slide in animation of the navigation */
+  //@include transform(translateX(80px));
+
+  .cd-navigation {
+    margin: 10px 0 16px;
+  }
+
+  .sub-menu {
+    padding: 0 10px 20px 15px;
+    display: none;
+  }
+
+  a {
+    display: block;
+    line-height: 2em;
+    padding: 0 16px 0 32px;
+    color: $color-3;
+
+    &.current {
+      background-color: lighten($color-2, 10%);
+      color: #000;
+    }
+
+    .no-touch &:hover {
+      color: #FFF;
+    }
+  } 
+
+  @include MQ(M) {
+    .cd-navigation {
+      margin: 20px 0;
+    }
+  }
+
+  &.lateral-menu-is-open {
+    //@include transform(translateX(0));
+  }
+}
+
+
+/* style menu items which have a submenu  */
+#cd-lateral-nav .item-has-children > a {
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  /* this is the right arrow to show that the item has a submenu  */
+  &::after {
+    content: '';
+    display: block;
+    height: 11px;
+    width: 8px;
+    position: absolute;
+    @include center(y);
+    right: 1em;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-arrow-sec-exp-nav.svg') no-repeat center center;
+    background-size: 8px 11px;
+
+    //@include transition-property(transform);
+    //@include transition-duration(.2s);
+  }
+
+  &.submenu-open::after {
+    //@include transform(translateY(-50%) rotate(90deg));
+
+  }
+}
+
+#cd-lateral-nav .socials {
+  //@include clearfix;
+  padding: 0 32px;
+
+  a {
+    height: 32px;
+    width: 32px;
+    float: left;
+    padding: 0;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-socials.svg');
+    background-repeat: no-repeat;
+    background-size: 128px 64px;
+    background-color: #FFF;
+    margin-right: .5em;
+    //@include border-radius;
+
+    &.cd-twitter {
+      background-position: 0 0;
+    }
+
+    &.cd-github {
+      background-position: -32px 0;
+    }
+
+    &.cd-facebook {
+      background-position: -64px 0;
+    }
+
+    &.cd-google {
+      background-position: -96px 0;
+    }
+
+    .no-touch &:hover {
+      background-color: $color-1;
+
+      &.cd-twitter {
+        background-position: 0 -32px;
+      }
+
+      &.cd-github {
+        background-position: -32px -32px;
+      }
+
+      &.cd-facebook {
+        background-position: -64px -32px;
+      }
+
+      &.cd-google {
+        background-position: -96px -32px;
+      }
+    }
+  }
+}
+

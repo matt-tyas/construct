@@ -1,0 +1,46 @@
+/*
+Theme Name: Construct
+Theme URI: http://matthewtyas.com
+Author: Matt Tyas
+Author URI: http://matthewtyas.com
+Description: Construct Wordpress theme 2014
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: construct
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+@charset "UTF-8";
+/*------------------------------------*\
+    STYLE.CSS
+\*------------------------------------*/
+/**
+ *
+ * sass --watch style.scss:style.min.css --style compressed
+ *
+ * Here we pull in some variables, include the inuit.css framework, then add our
+ * project-specific components afterwards.
+ */
+
+
+/**
+ * Setup
+ */
+@import "vars";
+@import "inuit.css/inuit";  
+
+
+
+
+
+/**
+ * She’s all yours, cap’n... Begin importing your stuff here.
+ */
+@import "ui/main";
+@import "ui/header";
+@import "ui/nav";  
+@import "ui/content"; 
+@import "ui/forms"; 
+@import "ui/footer";
+@import "ui/animation"; 
